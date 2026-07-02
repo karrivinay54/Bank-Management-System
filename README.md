@@ -238,3 +238,8 @@ https://www.linkedin.com/in/karri-vinay
 ## ⭐ If you found this project helpful
 
 Consider giving the repository a ⭐ on GitHub.
+
+
+---
+
+> This project was developed incrementally while learning C++, Object-Oriented Programming, File Handling, and Git. Each feature was implemented, tested, and committed separately to build a structured development history.
