@@ -1,19 +1,14 @@
-# Compiled executables
+# Compiled files
 *.exe
 *.out
 *.o
-*.obj
 
-# Generated data
+# Runtime data
 accounts.txt
 
-# VS Code settings
+# VS Code
 .vscode/
 
-# Temporary files
-*.log
-*.tmp
-
-# OS files
+# Windows
 Thumbs.db
-.DS_Store
+Desktop.ini
