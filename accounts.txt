@@ -1,3 +1,0 @@
- 101|vinay|20|1234567890|nagaram|savings|50000
-234|vinay|32|123456789009|kavuru|current|4567
-456|ram|32|0987654321|guntur|savings|6789
