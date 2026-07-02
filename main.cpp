@@ -152,6 +152,31 @@ void setBalance(double newBalance)
     balance = newBalance;
 }
 
+void setCustomerName(string name)
+{
+    customerName = name;
+}
+
+void setAge(int newAge)
+{
+    age = newAge;
+}
+
+void setPhoneNumber(string phone)
+{
+    phoneNumber = phone;
+}
+
+void setAddress(string newAddress)
+{
+    address = newAddress;
+}
+
+void setAccountType(string type)
+{
+    accountType = type;
+}
+
 
 };
 
@@ -309,6 +334,172 @@ void depositMoney()
     }
 }
 
+void withdrawMoney()
+{
+    vector<BankAccount> accounts = loadAccounts();
+
+    int accountNumber;
+    double amount;
+
+    cout << "\nEnter Account Number : ";
+    cin >> accountNumber;
+
+    cout << "Enter Withdrawal Amount : ";
+    cin >> amount;
+
+    bool found = false;
+
+    for (auto &account : accounts)
+    {
+        if (account.getAccountNumber() == accountNumber)
+        {
+            found = true;
+
+            if (account.getBalance() >= amount)
+            {
+                account.setBalance(account.getBalance() - amount);
+
+                saveAccounts(accounts);
+
+                cout << "\nWithdrawal Successful!\n";
+            }
+            else
+            {
+                cout << "\nInsufficient Balance!\n";
+            }
+
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "\nAccount not found!\n";
+    }
+}
+
+void checkBalance()
+{
+    vector<BankAccount> accounts = loadAccounts();
+
+    int accountNumber;
+
+    cout << "\nEnter Account Number : ";
+    cin >> accountNumber;
+
+    bool found = false;
+
+    for (const auto &account : accounts)
+    {
+        if (account.getAccountNumber() == accountNumber)
+        {
+            cout << "\nCurrent Balance : Rs. "
+                 << fixed << setprecision(2)
+                 << account.getBalance() << endl;
+
+            found = true;
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "\nAccount not found!\n";
+    }
+}
+
+void updateAccount()
+{
+    vector<BankAccount> accounts = loadAccounts();
+
+    int accountNumber;
+
+    cout << "\nEnter Account Number to Update : ";
+    cin >> accountNumber;
+
+    cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+    bool found = false;
+
+    for(auto &account : accounts)
+    {
+        if(account.getAccountNumber() == accountNumber)
+        {
+            string name, phone, address, type;
+            int age;
+
+            cout << "\nEnter New Customer Name : ";
+            getline(cin, name);
+
+            cout << "Enter New Age : ";
+            cin >> age;
+
+            cin.ignore(numeric_limits<streamsize>::max(), '\n');
+
+            cout << "Enter New Phone Number : ";
+            getline(cin, phone);
+
+            cout << "Enter New Address : ";
+            getline(cin, address);
+
+            cout << "Enter New Account Type : ";
+            getline(cin, type);
+
+            account.setCustomerName(name);
+            account.setAge(age);
+            account.setPhoneNumber(phone);
+            account.setAddress(address);
+            account.setAccountType(type);
+
+            saveAccounts(accounts);
+
+            cout << "\nAccount Updated Successfully!\n";
+
+            found = true;
+
+            break;
+        }
+    }
+
+    if(!found)
+    {
+        cout << "\nAccount not found!\n";
+    }
+}
+
+void deleteAccount()
+{
+    vector<BankAccount> accounts = loadAccounts();
+
+    int accountNumber;
+
+    cout << "\nEnter Account Number to Delete : ";
+    cin >> accountNumber;
+
+    bool found = false;
+
+    for (auto it = accounts.begin(); it != accounts.end(); it++)
+    {
+        if (it->getAccountNumber() == accountNumber)
+        {
+            accounts.erase(it);
+
+            saveAccounts(accounts);
+
+            cout << "\nAccount Deleted Successfully!\n";
+
+            found = true;
+
+            break;
+        }
+    }
+
+    if (!found)
+    {
+        cout << "\nAccount not found!\n";
+    }
+}
+
 int main()
 {
     int choice;
@@ -357,20 +548,28 @@ int main()
 }
 
             case 5:
-                cout << "\nWithdraw Selected.\n";
-                break;
+{
+    withdrawMoney();
+    break;
+}
 
             case 6:
-                cout << "\nCheck Balance Selected.\n";
-                break;
+{
+    checkBalance();
+    break;
+}
 
             case 7:
-                cout << "\nUpdate Account Selected.\n";
-                break;
+{
+    updateAccount();
+    break;
+}
 
             case 8:
-                cout << "\nDelete Account Selected.\n";
-                break;
+{
+    deleteAccount();
+    break;
+}
 
             case 9:
                 cout << "\nThank you for using Bank Management System!\n";
