@@ -3,6 +3,12 @@
 
 A console-based **Bank Management System** developed in **C++** using **Object-Oriented Programming (OOP)** and **File Handling**. The application allows users to securely manage bank accounts with persistent data storage, making it a practical demonstration of core C++ programming concepts.
 
+![C++](https://img.shields.io/badge/C%2B%2B-17-blue.svg)
+![OOP](https://img.shields.io/badge/OOP-Implemented-success)
+![File Handling](https://img.shields.io/badge/File%20Handling-Yes-orange)
+![Platform](https://img.shields.io/badge/Platform-Windows-lightgrey)
+![License](https://img.shields.io/badge/License-MIT-green)
+
 ---
 
 ## 📌 Project Overview
@@ -12,21 +18,32 @@ This project simulates the basic operations of a banking system through a menu-d
 The project was developed as part of the **Thiranex C++ Internship Program** to strengthen concepts such as classes, file handling, vectors, string streams, and CRUD operations.
 
 ---
+## 📑 Table of Contents
 
+- 📌 Project Overview
+- ✨ Features
+- 🛠 Technologies Used
+- 📂 Project Structure
+- ⚙️ How It Works
+- 🚀 Getting Started
+- 📸 Screenshots
+- 📖 Concepts Demonstrated
+- 🎯 Future Improvements
+- 📚 Learning Outcomes
+- 📊 Project Status
+- 👨‍💻 Author
+---
 ## ✨ Features
 
-- ✅ Create New Bank Account
-- 📂 Store Account Data Using File Handling
-- 📋 Display All Accounts
-- 🔍 Search Account by Account Number
-- 💰 Deposit Money
-- 💸 Withdraw Money
-- 💳 Check Account Balance
-- ✏️ Update Account Details
-- 🗑️ Delete Account
-- 💾 Persistent Storage using `accounts.txt`
-- 🖥️ Simple Menu-Driven Interface
-
+- [x] Create Account
+- [x] Display Accounts
+- [x] Search Account
+- [x] Deposit Money
+- [x] Withdraw Money
+- [x] Check Balance
+- [x] Update Account
+- [x] Delete Account
+- [x] Persistent File Storage
 ---
 
 ## 🛠️ Technologies Used
@@ -169,14 +186,13 @@ g++ main.cpp -o main
 ## 🎯 Future Improvements
 
 - Input Validation
-- Duplicate Account Number Detection
-- Password Protected Accounts
-- Interest Calculation
+- Duplicate Account Detection
 - Transaction History
-- Account Transfer
+- Fund Transfer
+- Password Protection
 - Binary File Storage
-- GUI Version using Qt or C#
-
+- Database (MySQL)
+- GUI using Qt
 ---
 
 ## 📚 What I Learned
@@ -189,22 +205,32 @@ During this project, I gained practical experience with:
 - Parsing text files using `stringstream`
 - Updating records using vectors
 - Applying CRUD operations in C++
-- Using Git and GitHub for version control
+- Managing project versions using Git and publishing projects on GitHub
+
+---
+
+## 📊 Project Status
+
+- ✅ Status: Completed
+- 🏷️ Version: v1.0.0
+- 💻 Language: C++
+- 🧩 Paradigm: Object-Oriented Programming
+- 💾 Storage: Text File (Persistent)
+- 📅 Last Updated: July 2026
 
 ---
 
 ## 👨‍💻 Author
-
+ 
 **Karri Vinay**
 
 B.Tech – Electronics & Communication Engineering  
 RGUKT IIIT Nuzvid
 
-GitHub:
-https://github.com/karrivinay54
+GitHub: https://github.com/karrivinay54
 
 LinkedIn:
-www.linkedin.com/in/karri-vinay
+https://www.linkedin.com/in/karri-vinay
 
 ---
 
