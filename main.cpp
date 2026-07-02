@@ -4,6 +4,7 @@
 #include <string>
 #include <iomanip>
 #include <sstream>
+#include <limits>
 
 using namespace std;
 
@@ -36,6 +37,7 @@ public:
     }
 
     // Function to take account details from user
+
     void inputDetails()
     {
         cout << "\n========== CREATE NEW ACCOUNT ==========\n";
@@ -43,7 +45,7 @@ public:
         cout << "Enter Account Number : ";
         cin >> accountNumber;
 
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         cout << "Enter Customer Name : ";
         getline(cin, customerName);
@@ -51,7 +53,7 @@ public:
         cout << "Enter Age : ";
         cin >> age;
 
-        cin.ignore();
+        cin.ignore(numeric_limits<streamsize>::max(), '\n');
 
         cout << "Enter Phone Number : ";
         getline(cin, phoneNumber);
@@ -67,7 +69,8 @@ public:
     }
 
     // Function to display account details
-    void displayDetails()
+
+    void displayDetails() const
     {
         cout << "\n----------------------------------------\n";
         cout << "Account Number : " << accountNumber << endl;
@@ -81,32 +84,37 @@ public:
     }
 
     // Function to save account to file
-    void saveToFile()
+
+    void writeToFile(ofstream &file)
+{
+    file << accountNumber << "|"
+         << customerName << "|"
+         << age << "|"
+         << phoneNumber << "|"
+         << address << "|"
+         << accountType << "|"
+         << balance << endl;
+}
+
+void saveToFile()
 {
     ofstream file("accounts.txt", ios::app);
 
-    if (file.is_open())
+    if (!file)
     {
-        file << accountNumber << "|"
-             << customerName << "|"
-             << age << "|"
-             << phoneNumber << "|"
-             << address << "|"
-             << accountType << "|"
-             << balance << endl;
-
-        file.close();
-
-        cout << "\nAccount saved successfully!\n";
+        cout << "Error opening file.\n";
+        return;
     }
-    else
-    {
-        cout << "\nError opening accounts.txt\n";
-    }
+
+    writeToFile(file);
+
+    file.close();
+
+    cout << "\nAccount saved successfully!\n";
 }
 
 // Load account details from a line in the file
-void loadFromString(string line)
+void loadFromString(const string &line)
 {
     stringstream ss(line);
     string temp;
@@ -129,13 +137,59 @@ void loadFromString(string line)
     balance = stod(temp);
 }
 
-int getAccountNumber()
+int getAccountNumber() const
 {
     return accountNumber;
 }
 
+double getBalance() const
+{
+    return balance;
+}
+
+void setBalance(double newBalance)
+{
+    balance = newBalance;
+}
+
 
 };
+
+
+void createAccount()
+{
+    BankAccount account;
+
+    account.inputDetails();
+
+    account.displayDetails();
+
+    account.saveToFile();
+}
+
+vector<BankAccount> loadAccounts()
+{
+    vector<BankAccount> accounts;
+
+    ifstream file("accounts.txt");
+
+    string line;
+
+    while(getline(file, line))
+    {
+        BankAccount account;
+
+        account.loadFromString(line);
+
+        accounts.push_back(account);
+    }
+
+    file.close();
+
+    return accounts;
+}
+
+
 
 void displayAllAccounts()
 {
@@ -207,6 +261,53 @@ void searchAccount()
     }
 }
 
+void saveAccounts(vector<BankAccount> &accounts)
+{
+    ofstream file("accounts.txt");
+
+    for(auto &account : accounts)
+    {
+        account.writeToFile(file);
+    }
+
+    file.close();
+}
+
+void depositMoney()
+{
+    vector<BankAccount> accounts = loadAccounts();
+
+    int accountNumber;
+    double amount;
+
+    cout << "\nEnter Account Number : ";
+    cin >> accountNumber;
+
+    cout << "Enter Deposit Amount : ";
+    cin >> amount;
+
+    bool found = false;
+
+    for (auto &account : accounts)
+    {
+        if (account.getAccountNumber() == accountNumber)
+        {
+            account.setBalance(account.getBalance() + amount);
+            found = true;
+            break;
+        }
+    }
+
+    if (found)
+    {
+        saveAccounts(accounts);
+        cout << "\nDeposit Successful!\n";
+    }
+    else
+    {
+        cout << "\nAccount not found!\n";
+    }
+}
 
 int main()
 {
@@ -234,17 +335,8 @@ int main()
         switch(choice)
         {
           case 1:
-{
-    BankAccount account;
-
-    account.inputDetails();
-
-    account.displayDetails();
-
-    account.saveToFile();
-
+    createAccount();
     break;
-}
 
             case 2:
 {
@@ -259,8 +351,10 @@ int main()
 }
 
             case 4:
-                cout << "\nDeposit Selected.\n";
-                break;
+{
+    depositMoney();
+    break;
+}
 
             case 5:
                 cout << "\nWithdraw Selected.\n";
