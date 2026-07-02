@@ -97,6 +97,7 @@ The application stores account information in:
 ```text
 accounts.txt
 ```
+acconts.txt will generates automatically when data is given 
 
 using a pipe-separated format:
 
