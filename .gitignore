@@ -1,0 +1,19 @@
+# Compiled executables
+*.exe
+*.out
+*.o
+*.obj
+
+# Generated data
+accounts.txt
+
+# VS Code settings
+.vscode/
+
+# Temporary files
+*.log
+*.tmp
+
+# OS files
+Thumbs.db
+.DS_Store

@@ -129,6 +129,11 @@ void loadFromString(string line)
     balance = stod(temp);
 }
 
+int getAccountNumber()
+{
+    return accountNumber;
+}
+
 
 };
 
@@ -157,6 +162,51 @@ void displayAllAccounts()
 
     file.close();
 }
+void searchAccount()
+{
+    ifstream file("accounts.txt");
+
+    if (!file)
+    {
+        cout << "\nNo accounts found!\n";
+        return;
+    }
+
+    int searchNumber;
+
+    cout << "\nEnter Account Number to Search: ";
+    cin >> searchNumber;
+
+    string line;
+
+    bool found = false;
+
+    while (getline(file, line))
+    {
+        BankAccount account;
+
+        account.loadFromString(line);
+
+        if (account.getAccountNumber() == searchNumber)
+        {
+            cout << "\nAccount Found!\n";
+
+            account.displayDetails();
+
+            found = true;
+
+            break;
+        }
+    }
+
+    file.close();
+
+    if (!found)
+    {
+        cout << "\nAccount not found.\n";
+    }
+}
+
 
 int main()
 {
@@ -203,8 +253,10 @@ int main()
 }
 
             case 3:
-                cout << "\nSearch Account Selected.\n";
-                break;
+{
+    searchAccount();
+    break;
+}
 
             case 4:
                 cout << "\nDeposit Selected.\n";
