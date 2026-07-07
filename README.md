@@ -231,7 +231,7 @@ RGUKT IIIT Nuzvid
 GitHub: https://github.com/karrivinay54
 
 LinkedIn:
-https://www.linkedin.com/in/karri-vinay
+(https://www.linkedin.com/in/vinay-karri-53071b288/)
 
 ---
 
